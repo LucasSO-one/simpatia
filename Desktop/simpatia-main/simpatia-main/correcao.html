@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>SIMPATIA - Sistema de Mídias Pedagógicas com IA</title>
+
+    <!-- Google tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S703Y659N7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-S703Y659N7');
+    </script>
+</head>
+
+<body>
+    <div id="notificacao-popup"></div>
+    <header>
+        <div class="header-content">
+            <img src="img/logo_unifenas.png" alt="Logo Unifenas" class="logo">
+            <h1>IQuest - Corretor de Questões Descritivas</h1>
+        </div>
+        <nav class="main-nav">
+            <button class="nav-btn" onclick="location.href='index.html'">Página Inicial</button>
+            <button class="nav-btn" onclick="window.open('https://chat.openai.com/', '_blank')">Acessar ChatGPT</button>
+            <button class="nav-btn" onclick="location.href='comoUsar.html'">Como usar</button>
+            <button class="nav-btn" onclick="location.href='creditos.html'">Créditos</button>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="grid-colunas">
+            <section class="container question-container">
+                <h2 class="section-title">Questões / Respostas</h2>
+                <form id="questionForm" class="question-form">
+                    <div class="form-group">
+                        <label for="pergunta">Questão:</label>
+                        <textarea id="pergunta" rows="6" name="pergunta" required
+                            placeholder="Insira a questão aqui"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="respostaAluno">Resposta do Aluno:</label>
+                        <textarea id="respostaAluno" rows="6" name="respostaAluno" required
+                            placeholder="Insira a resposta do aluno aqui"></textarea>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="gabarito">Gabarito / Palavras-chaves esperadas:</label>
+                        <textarea id="gabarito" rows="6" name="gabarito" 
+                            placeholder="Insira as palavras-chaves aqui"></textarea>
+                    </div>
+
+                    <button type="button" id="gerarPrompt" 
+                    class="btn btn-primary" >Gerar Prompt</button>
+
+                   
+                </form>
+            </section>
+
+            <section class="container chat-container">
+                <h2 class="section-title">Chat Corretor</h2>
+                <div class="form-group">
+                    <label for="inputQuestion">Cole o prompt gerado:</label>
+                    <textarea id="inputQuestion" rows="6" placeholder="Cole aqui o prompt gerado"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="result">Resposta da IA:</label>
+                    <textarea id="result" rows="8" disabled placeholder="Resposta da IA aparecerá aqui"></textarea>
+                </div>
+                
+                <button id="submitQuestion" class="btn btn-primary">
+                    <span class="btn-icon"></span> Enviar Pergunta
+                </button>
+            </section>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>ATEX - © 2025 SIMPATIA - Sistema de Mídias Pedagógicas com Inteligência Artificial</p>
+    </footer>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "@google/generative-ai": "https://esm.run/@google/generative-ai"
+            }
+        }
+    </script>
+    <script src="gerarPrompt.js"></script>
+    <script src="correcao.js" type="module"></script>
+</body>
+
+</html>
