@@ -55,6 +55,14 @@
                             placeholder="Insira as palavras-chaves aqui"></textarea>
                     </div>
 
+                    <div class="form-group">
+                        <label for="questaoImg" class="uploadArquivo">
+                            <h2>Enviar Imagem de Questão</h2>
+                            <span class="uploadImg">Adicionar Imagem</span>
+                            <input style="display: none;" class="questaoImg" type="file" accept=".jpg,.jpeg,.png">
+                        </label>
+                    </div>
+
                     <button type="button" id="gerarPrompt" 
                     class="btn btn-primary" >Gerar Prompt</button>
 
@@ -92,6 +100,20 @@
             }
         }
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const uploadImg = document.querySelector('.uploadImg');
+            const questaoImg = document.querySelector('.questaoImg');
+            
+            if (uploadImg && questaoImg) {
+                uploadImg.addEventListener('click', function() {
+                    questaoImg.click();
+                });
+            }  
+        });
+    </script>
+
     <script src="gerarPrompt.js"></script>
     <script src="correcao.js" type="module"></script>
 </body>

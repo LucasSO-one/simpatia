@@ -1264,3 +1264,12 @@ footer {
 html, body {
     transform-style: flat !important;
 }
+
+.uploadArquivo{
+    cursor: pointer;
+    display: block;
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
