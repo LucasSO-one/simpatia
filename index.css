@@ -1266,10 +1266,20 @@ html, body {
 }
 
 .uploadArquivo{
-    cursor: pointer;
     display: block;
     padding: 10px;
     border: 2px dashed #ccc;
     border-radius: 5px;
     text-align: center;
+}
+
+.uploadImg{
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.uploadImg:hover{
+  color:#5543ca;
+  font-size: 20px;
 }

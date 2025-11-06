@@ -18,6 +18,7 @@
 </head>
 
 <body>
+    <!-- popup de notificação -->
     <div id="notificacao-popup"></div>
     <header>
         <div class="header-content">
@@ -59,7 +60,8 @@
                         <label for="questaoImg" class="uploadArquivo">
                             <h2>Enviar Imagem de Questão</h2>
                             <span class="uploadImg">Adicionar Imagem</span>
-                            <input style="display: none;" class="questaoImg" type="file" accept=".jpg,.jpeg,.png">
+                            <input style="display: none;" id="questaoImg" 
+                            class="questaoImg" type="file" accept=".jpg,.jpeg,.png">
                         </label>
                     </div>
 
@@ -101,21 +103,9 @@
         }
     </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function(){
-            const uploadImg = document.querySelector('.uploadImg');
-            const questaoImg = document.querySelector('.questaoImg');
-            
-            if (uploadImg && questaoImg) {
-                uploadImg.addEventListener('click', function() {
-                    questaoImg.click();
-                });
-            }  
-        });
-    </script>
-
     <script src="gerarPrompt.js"></script>
     <script src="correcao.js" type="module"></script>
+    <script src="enviarImg.js"></script>
 </body>
 
 </html>
