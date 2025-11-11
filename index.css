@@ -1,4 +1,88 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+/*Variaveis*/
+:root {
+  /* Fonte padrão */
+  --font-family: "Inter";
+
+  /* Primary colors */
+  --azul-principal: #006fff;
+  --roxo-principal: #370199;
+
+  /*Variações de azul*/
+  --azul-escuro-01: #001838;
+  --azul-escuro-02: #002861;
+  --azul-escuro-03: #003785;
+  --azul-01: #0051c2;
+  --azul-02: #226dd6;
+  --azul-claro-01: #4485df;
+  --azul-claro-02: #88b3ee;
+  --azul-claro-03: #dbe9fc;
+
+  /*Variações de roxo*/
+  --roxo-escuro-01: #170048;
+  --roxo-escuro-02: #2c007f;
+  --roxo-escuro-03: #5122a9;
+  --roxo-01: #6b44b8;
+  --roxo-02: #8666c6;
+  --roxo-claro-01: #a088d4;
+  --roxo-claro-02: #bbaae1;
+  --roxo-claro-03: #d6ccee;
+
+  /*Variações de cores neutras*/
+  --neutro-700: #0c0c12;
+  --neutro-600: #4c4b67;
+  --neutro-500: #7a7a99;
+  --neutro-400: #adadcc;
+  --neutro-300: #c3c3d9;
+  --neutro-200: #e4e4f2;
+  --neutro-100: #f8f8fc;
+  --neutro-000: #fefeff;
+
+  /* Headings */
+  --heading-64-size: 64px;
+  --heading-64-weight: 500;
+  --heading-64-line: 1.2;
+
+  --heading-40-size: 40px;
+  --heading-40-weight: 600;
+  --heading-40-line: 1.2;
+
+  --heading-32-size: 32px;
+  --heading-32-weight: 600;
+  --heading-32-line: 1.2;
+
+  --heading-24-size: 24px;
+  --heading-24-weight: 600;
+  --heading-24-line: 1.2;
+
+  --heading-18-size: 18px;
+  --heading-18-weight: 600;
+  --heading-18-line: 1.2;
+
+  /*Body e Textos*/
+  --body-18-medium-size: 18px;
+  --body-18-medium-weight: 500;
+  --body-18-medium-line: 1.4;
+
+  --body-16-semi-size: 16px;
+  --body-16-semi-weight: 600;
+  --body-16-semi-line: 1.5;
+
+  --body-16-medium-size: 16px;
+  --body-16-medium-weight: 500;
+  --body-16-medium-line: 1.6;
+
+  --body-14-semi-size: 14px;
+  --body-14-semi-weight: 600;
+  --body-14-semi-line: 1.6;
+
+  --body-14-medium-size: 14px;
+  --body-14-medium-weight: 500;
+  --body-14-medium-line: 1.6;
+
+  --gradiente-roxo-escuro: linear-gradient(180deg, #4b04cd 0%, #4001b2 100%);
+  --gradiente-roxo-medio: linear-gradient(180deg, #8666c6 0%, #6b44b8 100%);
+  --gradiente-azul-claro: linear-gradient(180deg, #f8f8fc 0%, #dbe6fc 100%);
+}
 
 body {
   font-family: Arial, sans-serif;
@@ -45,43 +129,391 @@ select option[value="outro"]:checked+#outroInput {
 }
 
 
-header,
-footer {
-  background-color: #0077cc;
-  color: #fff;
-  padding: 10px;
+
+
+/* Container Principal */
+.footer-container {
+  background: linear-gradient(180deg, #dbe9fc 0%, #f8f8fc 100%);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Container de Conteúdo */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 80px 32px 40px 32px;
+  gap: 64px;
+  box-sizing: border-box;
+}
+
+/* --- Coluna Esquerda --- */
+.footer-left {
+  flex: 0 0 401px;
+  max-width: 401px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* Mantém alinhado à esquerda */
+  text-align: left;
+  /* Garante que o texto fique alinhado à esquerda */
+}
+
+.footer-logo-simpatia {
+  width: 192px;
+  height: 44.1px;
+  opacity: 0.8;
+  margin-bottom: 24px;
+}
+
+.footer-text-box {
+  width: 100%;
+  color: var(--neutro-600);
+  font-family: var(--font-family);
+  font-weight: var(--body-16-medium-weight);
+  font-size: var(--body-16-medium-size);
+  line-height: var(--body-16-medium-line);
+  background: transparent;
+  margin-bottom: 32px;
+  max-width: 384px;
+  text-align: left;
+  /* Garante alinhamento à esquerda */
+}
+
+.footer-text-description {
+  text-align: left;
+  /* Alinha especificamente o parágrafo à esquerda */
+  margin: 0;
+  /* Remove margens padrão */
+}
+
+.button-conhecer-modulos {
+  display: flex;
+  height: 63px;
+  padding: 8px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--roxo-principal);
+  background: var(--gradiente-roxo-escuro);
+  color: var(--azul-claro-03);
+  font-family: var(--font-family);
+  font-weight: var(--body-16-semi-weight);
+  font-size: var(--body-16-semi-size);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  align-self: flex-start;
+  /* Mantém o botão alinhado à esquerda */
+}
+
+.button-conhecer-modulos:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(55, 1, 153, 0.3);
+}
+
+
+
+/* --- Coluna Direita --- */
+.footer-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 62px;
+  align-items: flex-start;
+  /* Garante alinhamento à esquerda */
+}
+
+.footer-right-top {
+  display: flex;
+  justify-content: flex-start;
+  /* Alinha à esquerda */
+  width: 100%;
+  gap: 120px;
+  align-items: flex-start;
+  /* Alinha no topo */
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+  /* Alinha conteúdo à esquerda */
+  text-align: left;
+  /* Texto alinhado à esquerda */
+}
+
+.footer-column h3 {
+  color: var(--azul-principal);
+  font-family: var(--font-family);
+  font-weight: var(--heading-18-weight);
+  font-size: var(--heading-18-size);
+  line-height: var(--heading-18-line);
+  margin: 0;
+  text-align: left;
+  /* Garante alinhamento à esquerda */
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  /* Alinha itens à esquerda */
+  width: 100%;
+}
+
+.footer-column li {
+  width: 100%;
+}
+
+.footer-column li a {
+  color: var(--neutro-500);
+  font-family: var(--font-family);
+  font-weight: var(--body-16-medium-weight);
+  font-size: var(--body-16-medium-size);
+  line-height: var(--body-16-medium-line);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: block;
+  text-align: left;
+  /* Texto alinhado à esquerda */
+}
+
+.footer-column li a:hover {
+  color: var(--roxo-principal);
+}
+
+/* --- Parte Inferior Direita --- */
+.footer-right-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 120px;
+}
+
+.footer-text-know-more {
+  color: var(--azul-principal);
+  font-family: var(--font-family);
+  font-weight: var(--heading-18-weight);
+  font-size: var(--heading-18-size);
+  line-height: var(--heading-18-line);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+  height: 22px;
+}
+
+.footer-text-know-more:hover {
+  color: var(--roxo-principal);
+}
+
+.button-unifenas {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 64px;
+  border: 1px solid var(--roxo-principal);
+  border-radius: 8px;
+  padding: 16px 24px;
+  background-color: transparent;
+  color: var(--neutro-700);
+  font-family: var(--font-family);
+  font-weight: var(--heading-18-weight);
+  font-size: var(--heading-18-size);
+  line-height: var(--heading-18-line);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  min-width: 260px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.button-unifenas:hover {
+  background-color: var(--roxo-principal);
+  color: var(--neutro-100);
+  border-color: var(--roxo-principal);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(55, 1, 153, 0.3);
+}
+
+/* Estilo para o SVG dentro do botão */
+.button-unifenas .logo-unifenas {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+/* Corrigindo a cor do SVG no hover */
+.button-unifenas:hover .logo-unifenas path {
+  fill: var(--neutro-100);
+}
+
+/* Garantindo que o SVG tenha a cor inicial */
+.button-unifenas .logo-unifenas path {
+  fill: var(--roxo-principal);
+  transition: fill 0.3s ease;
+}
+
+/* --- Divisor e Rodapé Final --- */
+.footer-divider {
+  width: 100%;
+  height: 0px;
+  border-top: 1px dashed var(--neutro-400);
+  margin: 0;
+}
+
+.footer-final-division {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 24px 32px;
+  background-color: transparent;
+  box-sizing: border-box;
+  gap: 8px;
+  align-items: center;
+}
+
+.footer-final-division span {
+  font-family: var(--font-family);
+  font-weight: var(--body-16-medium-weight);
+  font-size: var(--body-16-medium-size);
+  line-height: var(--body-16-medium-line);
   text-align: center;
 }
 
-header img {
-  max-width: 100px;
-  margin-right: 10px;
+.footer-final-division .atex-info {
+  color: var(--neutro-700);
+}
+
+.footer-final-division .system-info {
+  color: var(--neutro-500);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 1024px) {
+  .footer-content {
+    padding: 60px 24px 40px 24px;
+    gap: 48px;
+  }
+
+  .footer-right-top {
+    gap: 80px;
+  }
+
+  .footer-right-bottom {
+    gap: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    padding: 40px 20px 32px 20px;
+    gap: 40px;
+  }
+
+  .footer-left {
+    flex: none;
+    width: 100%;
+    max-width: none;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-text-box {
+    text-align: center;
+    max-width: none;
+  }
+
+  .footer-right {
+    width: 100%;
+    gap: 40px;
+  }
+
+  .footer-right-top {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-column {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-right-bottom {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .footer-text-know-more {
+    text-align: center;
+  }
+
+  .button-unifenas {
+    min-width: 280px;
+  }
+
+  .footer-final-division {
+    flex-direction: column;
+    padding: 20px;
+    gap: 4px;
+    text-align: center;
+  }
+
+  .footer-final-division span {
+    font-size: var(--body-14-medium-size);
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-content {
+    padding: 32px 16px 24px 16px;
+    gap: 32px;
+  }
+
+  .footer-logo-simpatia {
+    width: 160px;
+    height: auto;
+  }
+
+  .button-conhecer-modulos,
+  .button-unifenas {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .footer-right-top {
+    gap: 32px;
+  }
+
+  .footer-right {
+    gap: 32px;
+  }
 }
 
 .hidden {
   display: none;
 }
 
-nav {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-nav a {
-  color: #0077cc;
-  text-decoration: none;
-  margin: 0 10px;
-  padding: 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-  /* Adicionado um efeito de transição para suavizar a mudança de cor */
-}
-
-nav a:hover {
-  background-color: #005a99;
-  color: #fff;
-}
 
 .form-container {
   margin-top: 20px;
@@ -947,22 +1379,14 @@ body {
 }
 
 header {
-  background: linear-gradient(90deg, #0077cc, #5543ca);
-  color: #fff;
-  padding: 15px 20px;
-  text-align: center;
-}
-
-header .header-content {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 15px;
+  justify-content: space-evenly;
+  position: relative;
+  z-index: 100000;
+  height: 100px;
 }
 
-header img {
-  max-width: 80px;
-}
 
 nav {
   margin-top: 15px;
@@ -983,9 +1407,376 @@ nav button {
   transition: all 0.3s ease;
 }
 
-nav button:hover {
-  background: #5543ca;
-  color: #fff;
+/* =========================================
+   MENU DROPDOWN - CORREÇÃO DO Z-INDEX
+========================================= */
+.nav-dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 10050; /* Alto o suficiente */
+}
+
+.dropdown-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--neutro-400, #5c5c5c);
+  font-family: var(--font-family);
+  font-size: var(--body-16-medium-size);
+  font-weight: var(--body-16-medium-weight);
+  line-height: var(--body-16-medium-line);
+  cursor: pointer;
+  padding: 12px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  position: relative;
+  z-index: 10051;
+}
+
+/* Dropdown quando navbar está scrolled */
+.navbar.scrolled .dropdown-btn {
+  color: var(--neutro-600);
+}
+
+.dropdown-btn:hover {
+  color: var(--azul-principal);
+  background: rgba(0, 111, 255, 0.1);
+}
+
+.navbar.scrolled .dropdown-btn:hover {
+  color: var(--roxo-principal);
+  background: rgba(55, 1, 153, 0.1);
+}
+
+/* Seta do dropdown */
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+}
+
+.nav-dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* CORREÇÃO CRÍTICA: Menu dropdown com z-index muito alto */
+.dropdown-menu {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  background: var(--neutro-000);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 320px; /* Largura fixa aumentada */
+  min-width: 320px; /* Largura mínima aumentada */
+  max-width: 350px; /* Largura máxima */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-15px) scale(0.95);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 99999;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Título do dropdown - estilo clean e bonito */
+.dropdown-menu h2 {
+  font-family: var(--font-family);
+  font-size: var(--body-16-semi-size);
+  font-weight: var(--body-16-semi-weight);
+  color: var(--roxo-principal);
+  margin: 0;
+  padding: 20px 20px 16px 20px;
+  text-align: center;
+  border-bottom: 2px solid rgba(55, 1, 153, 0.1);
+  background: linear-gradient(135deg, rgba(55, 1, 153, 0.03) 0%, rgba(0, 111, 255, 0.03) 100%);
+  position: relative;
+  letter-spacing: -0.2px;
+}
+
+/* Efeito sutil no título */
+.dropdown-menu h2::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--azul-principal), var(--roxo-principal));
+  border-radius: 2px;
+}
+
+/* Itens do dropdown ajustados para a nova largura */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  color: var(--neutro-600);
+  text-decoration: none;
+  font-family: var(--font-family);
+  font-size: var(--body-14-medium-size);
+  font-weight: var(--body-14-medium-weight);
+  line-height: var(--body-14-medium-line);
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  position: relative;
+  background: var(--neutro-000);
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: rgba(55, 1, 153, 0.05);
+  color: var(--roxo-principal);
+  padding-left: 24px;
+}
+
+/* Efeito de linha lateral no hover */
+.dropdown-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(180deg, var(--azul-principal), var(--roxo-principal));
+  transition: width 0.3s ease;
+}
+
+.dropdown-item:hover::before {
+  width: 3px;
+}
+
+/* Texto dos itens */
+.item-text {
+  flex: 1;
+}
+
+/* Ajuste para o container pai */
+.nav-dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 10050;
+}
+
+/* Versão mobile - ajustes responsivos */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    width: 100%;
+    min-width: auto;
+    max-width: none;
+  }
+  
+  .dropdown-menu h2 {
+    padding: 18px 20px 14px 20px;
+    font-size: var(--body-14-semi-size);
+  }
+}
+
+/* Quando o dropdown está ativo */
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown:focus-within .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Container especial para área de hover */
+.dropdown-hover-area {
+  position: absolute;
+  top: 100%;
+  left: -20px; /* Estende a área para os lados */
+  right: -20px;
+  height: 20px;
+  background: transparent;
+  z-index: 10049;
+}
+
+/* Itens do dropdown */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  color: var(--neutro-600);
+  text-decoration: none;
+  font-family: var(--font-family);
+  font-size: var(--body-14-medium-size);
+  font-weight: var(--body-14-medium-weight);
+  line-height: var(--body-14-medium-line);
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  background: var(--neutro-000);
+  z-index: 99999;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: rgba(55, 1, 153, 0.08);
+  color: var(--roxo-principal);
+  padding-left: 24px;
+  transform: translateX(2px);
+}
+
+/* Efeito de linha lateral no hover */
+.dropdown-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(180deg, var(--azul-principal), var(--roxo-principal));
+  transition: width 0.3s ease;
+}
+
+.dropdown-item:hover::before {
+  width: 4px;
+}
+
+/* Texto dos itens */
+.item-text {
+  flex: 1;
+}
+
+/* =========================================
+   GARANTIR QUE A NAVBAR TENHA Z-INDEX ALTO
+========================================= */
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0px;
+  width: 100%;
+  max-width: 1232px;
+  transition: all 0.4s ease;
+  z-index: 10000; /* Aumentado */
+}
+
+/* Navbar no modo fixo (após scroll) */
+.navbar-scrolled {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 1312px;
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.95); /* Mais opaco */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
+  border-radius: 8px;
+  animation: slideDown 0.4s ease forwards;
+  z-index: 10000; /* Aumentado */
+}
+
+/* =========================================
+   ANIMAÇÃO MELHORADA
+========================================= */
+@keyframes dropdownSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.nav-dropdown:hover .dropdown-menu {
+  animation: dropdownSlideIn 0.3s ease forwards;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+@media (max-width: 768px) {
+  .nav-dropdown {
+    width: 100%;
+  }
+  
+  .dropdown-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 20px;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown-menu {
+    position: static;
+    width: 100%;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    background: var(--neutro-000);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    pointer-events: none;
+    z-index: 99999;
+  }
+  
+  .nav-dropdown:hover .dropdown-menu,
+  .nav-dropdown:focus-within .dropdown-menu {
+    max-height: 400px;
+    transform: none;
+    pointer-events: auto;
+  }
+  
+  .dropdown-item {
+    justify-content: flex-start;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    background: var(--neutro-000);
+    margin: 0;
+    border-radius: 0;
+  }
+  
+  .dropdown-item:hover {
+    padding-left: 24px;
+    background: rgba(55, 1, 153, 0.08);
+  }
+  
+  .dropdown-hover-area {
+    display: none; /* Não necessário em mobile */
+  }
+}
+
+/* Para garantir que fique acima de tudo */
+.navbar {
+  z-index: 1000;
+}
+
+.navbar-scrolled {
+  z-index: 1001;
+}
+
+.dropdown-menu {
+  z-index: 1002;
 }
 
 main {
@@ -1231,55 +2022,43 @@ footer {
   }
 }
 
+ 
 #notificacao-popup {
-    /* --- A MÁGICA DO POSICIONAMENTO ESTÁ AQUI --- */
-    position: fixed; /* Faz o elemento 'flutuar' sobre a página */
-    bottom: 30px;    /* Fixa a 30px da parte de baixo da JANELA */
-    left: 50%;       /* Começa no meio da JANELA */
-    transform: translateX(-50%); /* Centraliza horizontalmente de forma precisa */
-    z-index: 1000;   /* Garante que fique na frente de tudo */
-    /* --- FIM DA MÁGICA --- */
+  /* --- A MÁGICA DO POSICIONAMENTO ESTÁ AQUI --- */
+  position: fixed;
+  /* Faz o elemento 'flutuar' sobre a página */
+  bottom: 30px;
+  /* Fixa a 30px da parte de baixo da JANELA */
+  left: 50%;
+  /* Começa no meio da JANELA */
+  transform: translateX(-50%);
+  /* Centraliza horizontalmente de forma precisa */
+  z-index: 1000;
+  /* Garante que fique na frente de tudo */
+  /* --- FIM DA MÁGICA --- */
 
-    /* Estilos que você já tem e estão funcionando */
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    
-    /* Configuração de visibilidade e animação */
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.5s, visibility 0.5s;
+  /* Estilos que você já tem e estão funcionando */
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  /* Configuração de visibilidade e animação */
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s, visibility 0.5s;
 }
 
 /* Esta classe não muda, continue com ela */
 #notificacao-popup.show {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Correção para o problema do position: fixed */
-html, body {
-    transform-style: flat !important;
-}
-
-.uploadArquivo{
-    display: block;
-    padding: 10px;
-    border: 2px dashed #ccc;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.uploadImg{
-  cursor: pointer;
-  font-size: 18px;
-  transition: all 0.3s ease;
-}
-
-.uploadImg:hover{
-  color:#5543ca;
-  font-size: 20px;
+html,
+body {
+  transform-style: flat !important;
 }
