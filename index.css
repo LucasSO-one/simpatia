@@ -2062,3 +2062,22 @@ html,
 body {
   transform-style: flat !important;
 }
+
+.uploadImg {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.uploadImg:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
