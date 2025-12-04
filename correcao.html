@@ -58,53 +58,94 @@
     </header>
 
     <main class="main-content">
+        <div class="modulo-correcao-badge">
+            <h4 class="badge"> <img src="./img/book-open.png" alt="Ícone Módulo Correção" class="icone-modulo-correcao">
+                Módulo para Correção de Questões</h4>
+        </div>
+        <h1 class="titulo">Correção de Questões Descritivas</h1>
+        <p class="subtitulo">Utilize inteligência artificial para analisar e avaliar respostas de forma precisa,
+            objetiva e construtiva.</p>
+
         <div class="grid-colunas">
             <section class="container question-container">
-                <h2 class="section-title">Questões / Respostas</h2>
+                <h2 class="section-title"> <img src="./img/icone-questoes.png" alt="Ícone Questões e Respostas"
+                        class="icone-questoes">Questões / Respostas</h2>
+                <p class="section-subtitle">Insira os dados da questão para correção</p>
+
                 <form id="questionForm" class="question-form">
+
                     <div class="form-group">
-                        <label for="pergunta">Questão:</label>
+                        <div class="topic">
+                            <span class="dot blue"></span>
+                            <label for="pergunta">Questão</label>
+                        </div>
                         <textarea id="pergunta" rows="6" name="pergunta" required
-                            placeholder="Insira a questão aqui"></textarea>
+                            placeholder="Digite ou cole o enunciado da questão aqui..."></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="respostaAluno">Resposta do Aluno:</label>
+                        <div class="topic">
+                            <span class="dot purple"></span>
+                            <label for="respostaAluno">Resposta do Aluno</label>
+                        </div>
                         <textarea id="respostaAluno" rows="6" name="respostaAluno" required
-                            placeholder="Insira a resposta do aluno aqui"></textarea>
+                            placeholder="Digite a resposta fornecida pelo aluno..."></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="gabarito">Gabarito / Palavras-chaves esperadas:</label>
+                        <div class="topic">
+                            <span class="dot blue"></span>
+                            <label for="gabarito">Gabarito / Palavras-chaves esperadas</label>
+                        </div>
                         <textarea id="gabarito" rows="6" name="gabarito"
-                            placeholder="Insira as palavras-chaves aqui"></textarea>
+                            placeholder="Digite o gabarito esperado aqui..."></textarea>
                     </div>
-
                     <div class="form-group">
                         <label for="questaoImg" class="uploadArquivo">
-                            <h2>Enviar Imagem de Questão</h2>
-                            <span class="uploadImg">Adicionar Imagem</span>
-                            <input style="display: none;" id="questaoImg" class="questaoImg" type="file"
-                                accept=".jpg,.jpeg,.png">
+                            <div class="upload-icon">
+                                <img src="./img/upload.png" alt="Ícone Upload de Arquivo"
+                                    class="icone-upload">
+                            </div>
+
+                            <div class="upload-content">
+                                <h3>Enviar Imagem da Questão</h3>
+                                <p class="upload-subtitle">PNG, JPG ou WEBP • Até 10MB</p>
+
+                                <div class="upload-action">
+                                    <span class="upload-btn">Clique para escolher arquivo</span>
+                                </div>
+                            </div>
+
+                            <input id="questaoImg" class="questaoImg" type="file" accept=".jpg,.jpeg,.png,.webp">
                         </label>
+
+                        <div class="file-preview" id="filePreview"></div>
                     </div>
 
                     <button type="button" id="gerarPrompt" class="btn btn-primary">Gerar Prompt</button>
-
-
                 </form>
+
             </section>
 
             <section class="container chat-container">
-                <h2 class="section-title">Chat Corretor</h2>
+                <h2 class="section-title"><img src="./img/sparkles.png" alt="Ícone Chat Corretor"
+                        class="icone-corretor">Chat Corretor (IA)</h2>
+                <p class="section-subtitle">Assistente inteligente de correção</p>
+
                 <div class="form-group">
-                    <label for="inputQuestion">Cole o prompt gerado:</label>
+                    <div class="topic">
+                        <span class="dot blue"></span>
+                        <label for="inputQuestion">Cole o prompt gerado</label>
+                    </div>
                     <textarea id="inputQuestion" rows="6" placeholder="Cole aqui o prompt gerado"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="result">Resposta da IA:</label>
-                    <textarea id="result" rows="8" disabled placeholder="Resposta da IA aparecerá aqui"></textarea>
+                    <div class="topic">
+                        <span class="dot purple"></span>
+                        <label for="result">Resposta da IA</label>
+                    </div>
+                    <textarea id="result" rows="8" disabled placeholder="A resposta da IA aparecerá aqui..."></textarea>
                 </div>
 
                 <button id="submitQuestion" class="btn btn-primary">
