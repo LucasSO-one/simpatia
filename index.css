@@ -1892,8 +1892,10 @@ main {
 }
 
 .question-form .btn-primary {
+  width: 100%;
   background: linear-gradient(135deg, #0077cc, #005a99);
   color: white;
+  padding: 14px 24px;
 }
 
 .question-form .btn-primary:hover {
@@ -1912,12 +1914,6 @@ main {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-.btn-icon {
-  margin-right: 8px;
-}
-
-
 
 /* Títulos das seções */
 .section-title {
@@ -2288,6 +2284,7 @@ textarea:focus {
 }
 
 .btn-primary {
+  width: 100%;
   display: inline-block;
   background: linear-gradient(125deg, #a72879, #064497);
   color: #fff;
