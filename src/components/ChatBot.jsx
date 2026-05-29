@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { IoChatbubblesOutline } from "react-icons/io5";
+import '../styles/chatbot.css';
+
 
 const ChatBotWidget = () => {
     const [isOpen, setIsOpen] = useState(false);

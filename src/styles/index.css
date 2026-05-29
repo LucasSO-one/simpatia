@@ -1,3 +1,7 @@
+
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 /*Variaveis*/
 :root {
   /* Fonte padrão */
@@ -865,7 +869,7 @@ form .form-row .textarea {
 }
 
 
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap");
+
 
 *,
 *::before,
@@ -1390,9 +1394,6 @@ textarea:focus {
 
 
 /*CSS atualizado da Correção de Questões descritivas*/
-
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
-
 * {
   margin: 0;
   padding: 0;
@@ -1413,7 +1414,6 @@ header {
   position: relative;
   z-index: 100000;
   height: 100px;
-  border-bottom: 1px solid var(--roxo-principal);
   margin-bottom: 40px;
 }
 

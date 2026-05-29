@@ -1,0 +1,279 @@
+/* =========================
+   PAGE
+========================= */
+
+.home-page {
+
+  position: relative;
+
+  min-height: 100vh;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef2ff,
+      #f8fafc
+    );
+
+  font-family: "Poppins", sans-serif;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 40px 20px;
+}
+
+/* =========================
+   BACKGROUND EFFECT
+========================= */
+
+.home-overlay {
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(147, 51, 234, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(37, 99, 235, 0.12),
+      transparent 30%
+    );
+
+  z-index: 1;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.home-container {
+
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  max-width: 1200px;
+
+  text-align: center;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+
+  width: 140px;
+
+  margin-bottom: 30px;
+}
+
+/* =========================
+   BADGE
+========================= */
+
+.home-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 54px;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.home-title {
+
+  font-size: 72px;
+
+  font-weight: 800;
+
+  letter-spacing: -2px;
+
+  color: #111827;
+
+  margin-bottom: 20px;
+}
+
+/* =========================
+   SUBTITLE
+========================= */
+
+.home-subtitle {
+
+  max-width: 760px;
+
+  margin: 0 auto;
+
+  font-size: 20px;
+
+  line-height: 1.7;
+
+  color: #6b7280;
+
+  margin-bottom: 40px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.home-buttons {
+
+  display: flex;
+
+  justify-content: center;
+
+  margin-bottom: 70px;
+}
+
+.btn-primary-home {
+
+  text-decoration: none;
+
+  padding: 18px 34px;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #9333ea,
+      #2563eb
+    );
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
+
+  box-shadow:
+    0 12px 30px rgba(37, 99, 235, 0.2);
+}
+
+.btn-primary-home:hover {
+
+  transform: translateY(-3px);
+
+  opacity: 0.95;
+}
+
+/* =========================
+   INFO GRID
+========================= */
+
+.home-info-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 24px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.info-card {
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 30px;
+
+  border: 1px solid #eef2f7;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.05);
+
+  text-align: left;
+}
+
+.info-card h3 {
+
+  font-size: 22px;
+
+  color: #111827;
+
+  margin-bottom: 14px;
+}
+
+.info-card p {
+
+  color: #6b7280;
+
+  line-height: 1.6;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+  .home-info-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+  .home-title {
+
+    font-size: 52px;
+  }
+
+  .home-subtitle {
+
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .home-title {
+
+    font-size: 38px;
+  }
+
+  .home-subtitle {
+
+    font-size: 16px;
+  }
+
+  .btn-primary-home {
+
+    width: 100%;
+  }
+
+  .logo {
+
+    width: 110px;
+  }
+}
