@@ -21,7 +21,7 @@ export default function Correcao() {
       setNotificacao("");
     }, 3000);
   }
-
+  
   function gerarPromptTexto() {
 
     let respostaFinal = respostaAluno;
