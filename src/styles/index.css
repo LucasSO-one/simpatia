@@ -564,18 +564,6 @@ select option[value="outro"]:checked+#outroInput {
 }
 
 button {
-  color: var(--color);
-  transition: 0.25s;
-}
-
-button:hover,
-button:focus {
-  border-color: var(--hover);
-  color: #fff;
-}
-
-
-button {
   background: none;
   border: 2px solid;
   font: inherit;
