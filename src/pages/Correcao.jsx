@@ -21,7 +21,7 @@ export default function Correcao() {
       setNotificacao("");
     }, 3000);
   }
-
+  
   function gerarPromptTexto() {
     let respostaFinal = respostaAluno;
     if (gabarito.trim() !== "") {
@@ -62,12 +62,27 @@ e coloque referências bibliográficas.
     }
     try {
       setResultado("Carregando...");
-      const response = await fetch("http://localhost:3000/corrigir", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ pergunta, resposta: respostaFinal }),
-      });
-      if (!response.ok) throw new Error("Erro na requisição");
+
+      const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+      const response = await fetch(
+        `${baseUrl}/corrigir`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            pergunta,
+            resposta: respostaFinal,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Erro na requisição");
+      }
+
       const data = await response.json();
       setResultado(data.correction);
       mostrarNotificacao("Correção gerada com sucesso!");
