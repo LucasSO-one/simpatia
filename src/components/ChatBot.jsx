@@ -34,7 +34,9 @@ const ChatBotWidget = () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch('http://localhost:3000/chat-suporte', {
+            const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+            
+            const response = await fetch(`${baseUrl}/chat-suporte`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -100,15 +102,26 @@ const ChatBotWidget = () => {
                         <div ref={messagesEndRef} />
                     </div>
 
-                    {/* Atalhos rápidos — só aparecem antes da 1ª mensagem do usuário */}
                     {messages.length === 1 && (
                         <div className="chatbot-suggestions">
                             <div className="suggestions">
-                                <button onClick={() => sendMessage('Como anexar gabarito?')}>
-                                    Como anexar gabarito?
+                                <button onClick={() => sendMessage('Como faço para submeter as respostas dos alunos para correção?')}>
+                                    Como faço para submeter as respostas dos alunos para correção?
                                 </button>
-                                <button onClick={() => sendMessage('A IA errou a nota, o que fazer?')}>
-                                    A IA errou a nota, o que fazer?
+                                <button onClick={() => sendMessage('Quais são os critérios que a Inteligência Artificial utiliza para avaliar as questões descritivas?')}>
+                                    Quais são os critérios que a Inteligência Artificial utiliza para avaliar as questões descritivas?
+                                </button>
+                                <button onClick={() => sendMessage('Se eu discordar da correção ou da nota atribuída pela IA, posso alterá-la?')}>
+                                    Se eu discordar da correção ou da nota atribuída pela IA, posso alterá-la?
+                                </button>
+                                <button onClick={() => sendMessage('Como faço para submeter as minhas questões?')}>
+                                    Como faço para submeter as minhas questões?
+                                </button>
+                                <button onClick={() => sendMessage('Os dados dos meus alunos e o conteúdo das provas são mantidos em privacidade?')}>
+                                    Os dados dos meus alunos e o conteúdo das provas são mantidos em privacidade?
+                                </button>
+                                <button onClick={() => sendMessage('O campo de Gabarito é obrigatório?')}>
+                                    O campo de Gabarito é obrigatório?
                                 </button>
                             </div>
                         </div>
