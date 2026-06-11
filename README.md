@@ -1,101 +1,129 @@
-# simpatia
-Correção de Questões Descritivas
+# SIMPATIA - Módulo de Correção de Questões Descritivas
 
-Este projeto é parte da SIMPATIA, uma plataforma web da UNIFENAS.
-Na parte em trabalhamos o professor pode enviar uma imagem ou escrever a pergunta diretamente, e a aplicação envia esses dados ao backend, que processa a requisição usando a API Gemini.
-O objetivo é oferecer uma solução simples, rápida e acessível para apoiar estudantes e professores.
+Este repositório contém o módulo de correção de questões da plataforma SIMPATIA, um sistema desenvolvido para a UNIFENAS. 
 
-Tecnologias Utilizadas
-Frontend
+A aplicação permite que professores enviem o enunciado, o gabarito e as respostas dos alunos (em formato de texto ou através do upload de imagens de provas físicas). Os dados são enviados ao servidor, que processa a requisição e utiliza Inteligência Artificial para gerar uma avaliação precisa, objetiva e construtiva. O sistema conta também com um assistente virtual integrado (Chatbot) para auxiliar os docentes no uso da ferramenta.
 
-HTML5
+## Arquitetura e Tecnologias Utilizadas
 
-CSS3
+O projeto adota uma arquitetura separada entre cliente (Frontend) e servidor (Backend), facilitando a integração e escalabilidade.
 
-JavaScript
+**Frontend (Raiz do projeto)**
+* React.js
+* Vite
+* React Router DOM
+* CSS3
 
-Integração com backend via Fetch API
+**Backend (Pasta /api)**
+* Node.js
+* Express
+* Multer (para processamento de upload de arquivos/imagens)
+* Integração com LLM via API
 
-Backend
+**Infraestrutura e Deploy**
+* Frontend hospedado na Vercel
+* Backend hospedado no Render
+* CI/CD automatizado via GitHub Actions
 
-Node.js
+---
 
-Express
+## Configuração de Ambiente (Variáveis)
 
-Integração com a API Gemini através de chave privada no .env
+Por questões de segurança, chaves de API e URLs sensíveis não são versionadas. O repositório contém arquivos de exemplo (.env.example). Você deve criar os arquivos .env correspondentes.
 
-Instalação do Projeto
-Pré-requisitos
+### 1. Variáveis do Frontend
+Crie um arquivo chamado .env na raiz do projeto com a URL do servidor backend:
 
-Node.js instalado
+```env
+# Para rodar localmente
+VITE_API_URL=http://localhost:3000
 
-NPM (ou Yarn)
+# Para produção (Vercel), esta variável é configurada no painel da plataforma.
+```
 
-Navegador moderno
+### 2. Variáveis do Backend
+Crie um arquivo chamado .env dentro da pasta /api com a chave de autenticação da IA:
 
-Passo a Passo
+```env
+# Chave de acesso à API de Inteligência Artificial
+OPENROUTER_API_KEY=sua_chave_aqui
+```
+(Nota: O arquivo .gitignore já está configurado para bloquear o envio de qualquer arquivo .env para o repositório remoto).
 
-Clone o repositório:
+---
 
-https://github.com/LucasSO-one/simpatia.git
+## Instalação e Execução Local
 
-Instale as dependências:
+### Pré-requisitos
+* Node.js (versão 20 ou superior recomendada)
+* NPM ou Yarn
 
+### Passo a Passo
+
+1. Clone o repositório:
+```bash
+git clone [https://github.com/LucasSO-one/simpatia.git](https://github.com/LucasSO-one/simpatia.git)
+cd simpatia
+```
+
+2. Inicie o Servidor (Backend):
+Abra um terminal, acesse a pasta da API, instale as dependências e inicie o serviço.
+```bash
+cd api
 npm install
+node server.js
+```
+O servidor estará rodando em http://localhost:3000.
 
+3. Inicie a Interface (Frontend):
+Abra um novo terminal na raiz do projeto (fora da pasta api), instale as dependências do React e inicie o servidor de desenvolvimento do Vite.
+```bash
+npm install
+npm run dev
+```
+A interface estará disponível na porta indicada pelo Vite (geralmente http://localhost:5173).
 
-Crie um arquivo .env na raiz do projeto.
+---
 
-Dentro dele coloque sua chave da API Gemini:
+## Documentação da API (Para Integração de Equipes)
 
-GEMINI_API_KEY=SUA_CHAVE_AQUI
+Para a equipe responsável por integrar este módulo ao restante da plataforma SIMPATIA, abaixo estão os endpoints expostos pelo nosso backend.
 
+### Rota de Correção de Questão
+* URL: /corrigir
+* Método: POST
+* Headers: Content-Type: application/json
+* Body:
+```json
+{
+  "pergunta": "Texto do enunciado da questão.",
+  "resposta": "Texto da resposta do aluno (incluindo o gabarito anexado pela regra de negócio do front)."
+}
+```
+* Retorno de Sucesso (200 OK):
+```json
+{
+  "correction": "Texto formatado com a avaliação gerada pela Inteligência Artificial."
+}
+```
 
-O arquivo .env.example existe apenas como modelo.
-Quem baixar o projeto deve copiar ele, renomear para .env e colocar a própria chave.
-
-Sobre o .env e Segurança
-
-Por segurança, nenhum arquivo que contenha chaves sensíveis deve ser versionado, caso versionado, a chave é bloqueada pela própria Gemini.
-
-Por isso o .gitignore contém:
-
-.env
-.env.local
-.env.development
-.env.production
-
-
-Assim, apenas o arquivo .env.example é enviado para o GitHub.
-Ele mostra o formato esperado, mas não expõe nenhuma chave real.
-
-Exemplo do conteúdo:
-
-GEMINI_API_KEY=INSIRA SUA CHAVE DA API AQUI
-
-Como Rodar o Projeto
-Backend
-
-Após configurar o .env, use:
-
-/simpatia/api > node server.js
-
-O backend iniciará e ficará responsável por receber os dados e fazer a chamada para a API Gemini.
-
-Frontend
-
-O frontend está na pasta pública, basta utilizar o Live Server
-
-Funcionalidades
-
-Enviar imagem da questão
-
-Enviar texto escrito pelo usuário
-
-Processamento da imagem/texto no backend
-
-Comunicação com o modelo Gemini para análise
-
-Retorno formatado da resposta
-
-Interface simples, elegante
+### Rota do Chatbot de Suporte
+* URL: /chat-suporte
+* Método: POST
+* Headers: Content-Type: application/json
+* Body:
+```json
+{
+  "mensagemUsuario": "Como anexo um gabarito?",
+  "historico": [
+    { "role": "model", "parts": [{ "text": "Ola! Sou o assistente..." }] },
+    { "role": "user", "parts": [{ "text": "Mensagem anterior" }] }
+  ]
+}
+```
+* Retorno de Sucesso (200 OK):
+```json
+{
+  "resposta": "Texto da resposta gerada pelo assistente."
+}
+```
