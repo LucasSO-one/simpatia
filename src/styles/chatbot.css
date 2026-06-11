@@ -4,7 +4,7 @@
 ========================================= */
 
 .chatbot-container {
-  backendground: transparent;
+  background-color: transparent;
   position: fixed !important;
   bottom: 30px;
   right: 30px;
@@ -16,18 +16,19 @@
 
 /* Botão Circular (FAB) - isolado do estilo global de button */
 .chatbot-container .chatbot-fab {
-  backendground: none;
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: white;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   padding: 0;
   flex-shrink: 0;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .chatbot-container .chatbot-fab:hover {
@@ -35,7 +36,7 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* Janela do Chat */
+/* Janela do Chat (Padrão) */
 .chatbot-modal {
   width: 320px;
   height: 450px;
@@ -47,6 +48,13 @@
   flex-direction: column;
   overflow: hidden;
   font-family: sans-serif;
+  transition: width 0.3s ease, height 0.3s ease; /* Animação de expansão */
+}
+
+/* Janela do Chat (Expandida) */
+.chatbot-modal.expanded {
+  width: 600px;
+  height: 80vh; /* Ocupa 80% da altura da tela */
 }
 
 /* Cabeçalho */
@@ -67,69 +75,106 @@
   color: white;
 }
 
-/* Botão fechar - isolado */
-.chatbot-container .close-btn {
+.header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Botões do cabeçalho (Fechar e Expandir) - isolados */
+.chatbot-container .close-btn,
+.chatbot-container .expand-btn {
   all: unset;
   color: white;
-  font-weight: bold;
   cursor: pointer;
-  font-size: 16px;
-  line-height: 1;
-  padding: 2px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
   border-radius: 4px;
   transition: background-color 0.2s;
 }
 
-.chatbot-container .close-btn:hover {
+.chatbot-container .close-btn {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.chatbot-container .close-btn:hover,
+.chatbot-container .expand-btn:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Corpo do Chat */
 .chatbot-body {
   flex: 1;
-  padding: 15px;
-  overflow-y: auto;
+  overflow: hidden; /* A rolagem agora fica no container interno */
   background-color: #f9f9f9;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+}
+
+/* Container interno com rolagem isolada */
+.messages-container {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mensagens e espaçamento */
+.bot-message,
+.user-message {
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  max-width: 85%;
+  margin-bottom: 15px; /* Novo: Espaçamento entre as mensagens */
+  line-height: 1.4;
+  position: relative;
 }
 
 .bot-message {
   background-color: #e6e6fa;
   color: black;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 14px;
-  max-width: 85%;
   align-self: flex-start;
+  border-bottom-left-radius: 0; /* Detalhe visual de balão */
 }
 
 .user-message {
   background-color: #4a3aff;
   color: white;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 14px;
-  max-width: 85%;
   align-self: flex-end;
+  border-bottom-right-radius: 0; /* Detalhe visual de balão */
+}
+
+/* Feedback de digitação */
+.bot-typing {
+  background-color: transparent;
+  color: #888;
+  font-style: italic;
+  padding: 0 10px;
 }
 
 /* Atalhos rápidos */
 .chatbot-suggestions {
-  padding: 0 15px 10px;
+  padding: 0 15px 15px;
   background-color: #f9f9f9;
+}
+
+.suggestions {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  flex-shrink: 0;
+  gap: 10px; /* Aumentado para dar mais respiro entre os botões */
 }
 
 .chatbot-container .suggestions button {
   all: unset;
   display: block;
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   box-sizing: border-box;
   background-color: white;
   border: 1px solid #4a3aff;
@@ -137,8 +182,9 @@
   border-radius: 6px;
   cursor: pointer;
   font-size: 13px;
-  text-align: center;
+  text-align: left; /* Alinhado à esquerda para textos longos */
   transition: background-color 0.2s, color 0.2s;
+  line-height: 1.3;
 }
 
 .chatbot-container .suggestions button:hover {
@@ -157,30 +203,29 @@
 
 .chatbot-footer input {
   flex: 1;
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
   outline: none;
   font-size: 14px;
   font-family: sans-serif;
   background-color: white;
   color: #333;
+  transition: border-color 0.2s ease;
 }
 
 .chatbot-footer input:focus {
   border-color: #4a3aff;
 }
 
-
-
 /* Botão enviar - isolado */
 .chatbot-container .send-btn {
   all: unset;
   background-color: #4a3aff;
   color: white;
-  border-radius: 4px;
-  margin-left: 5px;
-  padding: 0 15px;
+  border-radius: 6px;
+  margin-left: 8px;
+  padding: 0 18px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;

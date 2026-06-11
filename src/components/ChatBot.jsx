@@ -3,6 +3,7 @@ import '../styles/chatbot.css';
 
 const ChatBotWidget = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false); 
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [messages, setMessages] = useState([
@@ -17,7 +18,15 @@ const ChatBotWidget = () => {
         }
     }, [messages]);
 
-    const toggleChatBot = () => setIsOpen(prev => !prev);
+    const toggleChatBot = () => {
+        setIsOpen(prev => !prev);
+        // Reseta o estado de expansão ao fechar
+        if (isOpen) {
+            setIsExpanded(false);
+        }
+    };
+
+    const toggleExpandChat = () => setIsExpanded(prev => !prev); 
 
     const getGeminiHistory = () => {
         return messages.slice(1).map(msg => ({
@@ -71,37 +80,63 @@ const ChatBotWidget = () => {
         </svg>
     );
 
+    const ExpandIcon = () => (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 3h6v6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M9 21H3v-6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M21 3l-7 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M3 21l7-7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+    );
+
+    const ShrinkIcon = () => (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 14h6v6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M20 10h-6V4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M14 10l7-7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M10 14l-7 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+    );
+
     return (
         <div className="chatbot-container">
 
-            {/* Janela do chat */}
+            {/* Janela do chat - classe modal condicional para expansão */}
             {isOpen && (
-                <div className="chatbot-modal">
+                <div className={`chatbot-modal ${isExpanded ? 'expanded' : ''}`}>
 
                     {/* Cabeçalho */}
                     <div className="chatbot-header">
                         <h4>Assistente SIMPATIA</h4>
-                        <button className="close-btn" onClick={toggleChatBot}>✕</button>
+                        <div className="header-actions">
+                            <button className="expand-btn" onClick={toggleExpandChat}>
+                                {isExpanded ? <ShrinkIcon /> : <ExpandIcon />}
+                            </button>
+                            <button className="close-btn" onClick={toggleChatBot}>✕</button>
+                        </div>
                     </div>
 
-                    {/* Mensagens */}
+                    {/* Mensagens - container flexbox com rolagem */}
                     <div className="chatbot-body">
-                        {messages.map((msg, index) => (
-                            <div
-                                key={index}
-                                className={msg.sender === 'user' ? 'user-message' : 'bot-message'}
-                            >
-                                {msg.text}
-                            </div>
-                        ))}
+                        <div className="messages-container">
+                            {messages.map((msg, index) => (
+                                <div
+                                    key={index}
+                                    className={msg.sender === 'user' ? 'user-message' : 'bot-message'}
+                                >
+                                    {msg.text}
+                                </div>
+                            ))}
 
-                        {isLoading && (
-                            <div className="bot-message">Digitando...</div>
-                        )}
+                            {isLoading && (
+                                <div className="bot-message bot-typing">Digitando...</div>
+                            )}
 
-                        <div ref={messagesEndRef} />
+                            <div ref={messagesEndRef} />
+                        </div>
                     </div>
 
+                    {/* Atalhos rápidos — container com flexbox vertical e espaçamento */}
                     {messages.length === 1 && (
                         <div className="chatbot-suggestions">
                             <div className="suggestions">
