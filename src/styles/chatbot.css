@@ -162,6 +162,10 @@
 .chatbot-suggestions {
   padding: 0 15px 15px;
   background-color: #f9f9f9;
+
+  max-height: 190px; /* Limita a altura para não empurrar o rodapé */
+  overflow-y: auto;  /* Cria a barra de rolagem vertical automaticamente */
+  flex-shrink: 1;    /* Permite que o container se ajuste se faltar espaço */
 }
 
 .suggestions {
@@ -241,4 +245,77 @@
 .chatbot-container .send-btn:disabled {
   background-color: #aaa;
   cursor: not-allowed;
+}
+
+/* =========================================
+   TOOLTIP DE BOAS VINDAS (ONBOARDING)
+========================================= */
+
+.chatbot-tooltip {
+  position: absolute;
+  bottom: 80px; /* Posiciona logo acima do botão flutuante */
+  right: 0;
+  width: 260px;
+  background-color: #4a3aff;
+  color: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2147483646;
+  font-family: sans-serif;
+  animation: floatTooltip 2.5s ease-in-out infinite;
+}
+
+.chatbot-tooltip .tooltip-text strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.chatbot-tooltip .tooltip-text p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: 0.95;
+}
+
+.chatbot-container .tooltip-close {
+  all: unset;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+}
+
+.chatbot-container .tooltip-close:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Seta geométrica apontando para o botão do chat */
+.tooltip-arrow {
+  position: absolute;
+  bottom: -8px;
+  right: 22px; /* Alinhado geometricamente com o centro do FAB de 60px */
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #4a3aff;
+}
+
+/* Animação que faz o balão flutuar continuamente */
+@keyframes floatTooltip {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
 }

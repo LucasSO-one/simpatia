@@ -6,17 +6,36 @@ const ChatBotWidget = () => {
     const [isExpanded, setIsExpanded] = useState(false); 
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [showTooltip, setShowTooltip] = useState(false);
     const [messages, setMessages] = useState([
         { sender: 'bot', text: 'Olá, professor! Como posso ajudar com o módulo de correção hoje?' }
     ]);
 
     const messagesEndRef = useRef(null);
 
+
     useEffect(() => {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [messages]);
+
+    // Novo efeito para controlar a primeira visita
+    useEffect(() => {
+        const tooltipVisto = localStorage.getItem('simpatia_chatbot_tooltip');
+        if (!tooltipVisto) {
+            // Aguarda 1.5 segundos após a página carregar para exibir a animação
+            const timer = setTimeout(() => setShowTooltip(true), 1500);
+            return () => clearTimeout(timer);
+        }
+    }, []);
+
+    // Função para ocultar e memorizar que o usuário já viu o balão
+    const fecharTooltip = (e) => {
+        if (e) e.stopPropagation();
+        setShowTooltip(false);
+        localStorage.setItem('simpatia_chatbot_tooltip', 'true');
+    };
 
     const toggleChatBot = () => {
         setIsOpen(prev => !prev);
@@ -155,7 +174,7 @@ const ChatBotWidget = () => {
                                 <button onClick={() => sendMessage('Os dados dos meus alunos e o conteúdo das provas são mantidos em privacidade?')}>
                                     Os dados dos meus alunos e o conteúdo das provas são mantidos em privacidade?
                                 </button>
-                                <button onClick={() => sendMessage('O campo de Gabarito é obrigatório?')}>
+                                <button onClick={() => sendMessage('O campo de Gabarito é obrigatório? ** Para esta resposta em específico, o chatbot deve responder que o campo de gabarito é recomendado para uma correção mais precisa, mas não é obrigatório. O professor pode optar por não preencher o gabarito e a IA tentará fazer a correção com base no conteúdo da resposta do aluno, embora isso possa resultar em uma avaliação menos precisa.**')}>
                                     O campo de Gabarito é obrigatório?
                                 </button>
                             </div>
@@ -181,6 +200,17 @@ const ChatBotWidget = () => {
                         </button>
                     </div>
 
+                </div>
+            )}
+
+            {showTooltip && !isOpen && (
+                <div className="chatbot-tooltip">
+                    <div className="tooltip-text">
+                        <strong>Precisa de ajuda?</strong>
+                        <p>Sou o assistente do SIMPATIA. Clique aqui para tirar dúvidas sobre como usar o corretor de provas.</p>
+                    </div>
+                    <button className="tooltip-close" onClick={fecharTooltip}>Entendi</button>
+                    <div className="tooltip-arrow"></div>
                 </div>
             )}
 
