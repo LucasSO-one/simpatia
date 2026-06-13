@@ -93,6 +93,10 @@ e coloque referências bibliográficas.
     }
   }
 
+  const handleExportarPDF = () => {
+    window.print();
+  };
+
   return (
     <>
       <div className="correcao-page">
@@ -186,12 +190,62 @@ e coloque referências bibliográficas.
               />
             </div>
 
-            <button className="btn-primary" onClick={handleQuestionSubmit}>
-              Enviar Pergunta
-            </button>
+            <div className="acoes-botoes-container">
+              <button className="btn-primary" onClick={handleQuestionSubmit}>
+                Enviar Pergunta
+              </button>
+
+              {resultado && resultado !== "Carregando..." && resultado !== "Erro ao obter resposta." && (
+                <button className="btn-exportar" onClick={handleExportarPDF}>
+                  Exportar PDF
+                </button>
+              )}
+            </div>
           </section>
 
         </div>
+
+        {resultado && resultado !== "Carregando..." && resultado !== "Erro ao obter resposta." && (
+          <div className="relatorio-impressao">
+            <div className="relatorio-cabecalho-oficial">
+              <h2>SIMPATIA - Sistema de Avaliação Assistida</h2>
+              <p>Relatório Oficial de Correção Descritiva - UNIFENAS</p>
+              <hr />
+            </div>
+
+            <div className="relatorio-secao">
+              <h3>Enunciado da Questão</h3>
+              <p>{pergunta}</p>
+            </div>
+
+            <div className="relatorio-secao">
+              <h3>Resposta do Aluno</h3>
+              <p>{respostaAluno}</p>
+            </div>
+
+            {gabarito.trim() && (
+              <div className="relatorio-secao">
+                <h3>Gabarito de Referência</h3>
+                <p>{gabarito}</p>
+              </div>
+            )}
+
+            <div className="relatorio-secao">
+              <h3>Parecer Técnico da Inteligência Artificial</h3>
+              <div className="conteudo-feedback" style={{ whiteSpace: "pre-wrap" }}>
+                {resultado}
+              </div>
+            </div>
+
+            <div className="relatorio-rodape-nota">
+              <div className="assinatura-professor">
+                <div className="linha-assinatura"></div>
+                <p>Assinatura do Professor Responsável</p>
+              </div>
+            </div>
+          </div>
+        )}
+
       </div>
 
       {createPortal(<ChatBotWidget />, document.body)}

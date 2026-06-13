@@ -346,3 +346,166 @@
     width: 100%;
   }
 }
+
+/* =========================================
+   ESTILOS DE TELA PRINCIPAL (WEB)
+========================================= */
+.relatorio-cabecalho-oficial {
+  display: none; /* Oculto na navegação normal do site */
+}
+
+.btn-exportar {
+  background-color: #4a3aff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-exportar:hover {
+  background-color: #3a2aee;
+}
+
+.relatorio-impressao {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.relatorio-secao {
+  margin-bottom: 25px;
+}
+
+.relatorio-secao h3 {
+  color: #4a3aff;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.relatorio-rodape-nota {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 40px;
+}
+
+.nota-bloco {
+  background-color: #f4f3ff;
+  padding: 15px;
+  border-radius: 6px;
+  border-left: 4px solid #4a3aff;
+}
+
+.nota-bloco strong {
+  font-size: 18px;
+  color: #4a3aff;
+  display: block;
+  margin-top: 5px;
+}
+
+.assinatura-professor {
+  display: none; /* Oculto na tela do computador */
+}
+
+
+/* =========================================
+   REGRAS DE IMPRESSÃO (GERAÇÃO DE PDF)
+========================================= */
+@media print {
+  /* 1. Esconder elementos globais da interface que não devem sair no papel */
+  .navbar,
+  .sidebar,
+  .acoes-resultado,
+  .chatbot-container,
+  .chatbot-modal,
+  .chatbot-fab,
+  footer {
+    display: none !important;
+  }
+
+  /* 2. Resetar o corpo da página para usar o máximo do espaço da folha A4 */
+  body, 
+  .main-content, 
+  .resultado-container {
+    background: white !important;
+    color: black !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-shadow: none !important;
+  }
+
+  /* 3. Tornar os elementos de relatório oficiais visíveis no documento */
+  .relatorio-cabecalho-oficial {
+    display: block !important;
+    margin-bottom: 30px;
+  }
+
+  .relatorio-cabecalho-oficial h2 {
+    font-size: 20px;
+    color: #333;
+    margin: 0 0 5px 0;
+  }
+
+  .relatorio-cabecalho-oficial p {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+  }
+
+  .assinatura-professor {
+    display: block !important;
+    text-align: center;
+    width: 250px;
+  }
+
+  .linha-assinatura {
+    border-bottom: 1px solid #000;
+    margin-bottom: 5px;
+    width: 100%;
+    height: 40px;
+  }
+
+  .assinatura-professor p {
+    font-size: 11px;
+    margin: 0;
+    color: #333;
+  }
+
+  /* 4. Ajustes de tipografia e quebras de página para o PDF */
+  .relatorio-impressao {
+    padding: 0 !important;
+  }
+
+  .relatorio-secao h3 {
+    color: #000 !important; /* Cor preta para economizar tinta e manter a formalidade */
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 4px;
+  }
+
+  .relatorio-secao p, 
+  .conteudo-feedback {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #222;
+  }
+
+  /* Evita que uma secção mude de página de forma cortada a meio se puder ser evitado */
+  .relatorio-secao {
+    page-break-inside: avoid;
+  }
+
+  .nota-bloco {
+    background-color: #fff !important;
+    border: 1px solid #000 !important;
+    padding: 10px !important;
+  }
+
+  .nota-bloco strong {
+    color: #000 !important;
+  }
+}
