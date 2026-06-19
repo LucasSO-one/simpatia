@@ -118,12 +118,19 @@ app.post('/analisar-imagem', upload.single('imagem'), async (req, res) => {
 
         // Prompt engenheirado para forçar a IA a agir como um classificador
         const systemPrompt = `Você é um assistente acadêmico especialista em leitura de provas.
-Sua tarefa é analisar a imagem enviada, identificar o que é o enunciado da questão e o que é a resposta escrita pelo aluno.
-Você DEVE retornar EXATAMENTE um objeto JSON válido, sem formatações adicionais ou marcações markdown, contendo duas chaves:
+Sua tarefa é analisar a imagem enviada e separar o conteúdo em duas partes: o enunciado da questão e a resposta do aluno.
+Você DEVE retornar EXATAMENTE um objeto JSON válido, sem formatações adicionais ou marcações markdown (não use \`\`\`json).
+
+O formato exato deve ser:
 {
   "pergunta": "texto do enunciado aqui",
-  "respostaAluno": "texto da resposta aqui"
-}`;
+  "respostaAluno": "texto da resposta do aluno aqui"
+}
+
+REGRAS CRÍTICAS:
+1. Se a imagem contiver APENAS a pergunta e NENHUMA resposta de aluno, preencha a chave "respostaAluno" com uma string vazia "".
+2. Se a imagem contiver APENAS a resposta, preencha a chave "pergunta" com "".
+3. Não adicione comentários extras, saudações ou explicações. Retorne APENAS o objeto JSON.`;
 
         const completion = await grokViaOpenRouter.chat.completions.create({
             model: "x-ai/grok-4.20", 

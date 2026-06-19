@@ -32,16 +32,8 @@ export default function UploadImagem({
 
             const data = await response.json();
 
-            setPergunta(
-                data.pergunta ||
-                "Não foi possível extrair a pergunta."
-            );
-
-            setRespostaAluno(
-                data.resposta ||
-                "Não foi possível extrair a resposta."
-            );
-
+            if (data.pergunta !== undefined) setPergunta(data.pergunta);
+            if (data.respostaAluno !== undefined) setRespostaAluno(data.respostaAluno);
             setResultado("Texto extraído com sucesso!");
 
         } catch (error) {
