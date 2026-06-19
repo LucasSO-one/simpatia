@@ -12,13 +12,14 @@ export default function UploadImagem({
 
         const formData = new FormData();
         formData.append("imagem", file);
+        const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
         setResultado("Lendo imagem, por favor aguarde...");
 
         try {
 
             const response = await fetch(
-                "http://localhost:3000/analisar-imagem",
+                `${baseUrl}/analisar-imagem`,
                 {
                     method: "POST",
                     body: formData,
