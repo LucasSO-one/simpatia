@@ -106,6 +106,48 @@ app.post('/chat-suporte', async (req, res) => {
     }
 });
 
+// Rota para analisar a imagem do gabarito ou resposta
+app.post('/analisar-imagem', upload.single('imagem'), async (req, res) => {
+    try {
+        // Verifica se o arquivo realmente chegou
+        if (!req.file) {
+            return res.status(400).json({ error: "Nenhuma imagem foi recebida." });
+        }
+
+        // Converte a imagem em memória para Base64 para a IA conseguir "enxergar"
+        const base64Image = req.file.buffer.toString('base64');
+        const mimeType = req.file.mimetype;
+        const dataURI = `data:${mimeType};base64,${base64Image}`;
+
+        const systemPrompt = "Você é um assistente acadêmico. Sua única tarefa é extrair e transcrever o texto presente na imagem fornecida, sem adicionar comentários extras.";
+
+        // Chamada para a IA ler a imagem
+        const completion = await grokViaOpenRouter.chat.completions.create({
+            model: "x-ai/grok-4.20", 
+            max_tokens: 2000,
+            messages: [
+                { role: "system", content: systemPrompt },
+                { 
+                    role: "user", 
+                    content: [
+                        { type: "text", text: "Transcreva o texto desta imagem." },
+                        { type: "image_url", image_url: { url: dataURI } }
+                    ]
+                }
+            ],
+        });
+
+        const text = completion.choices[0].message.content;
+        
+        // Retorna o texto extraído para o front-end
+        res.json({ textoExtraido: text }); 
+
+    } catch (err) {
+        console.error("Erro na leitura da imagem (OPENROUTER):", err);
+        return res.status(500).json({ error: "Erro interno ao processar a imagem." });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Servidor em http://localhost:${port}`);
 });
