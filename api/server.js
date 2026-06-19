@@ -106,22 +106,25 @@ app.post('/chat-suporte', async (req, res) => {
     }
 });
 
-// Rota para analisar a imagem do gabarito ou resposta
 app.post('/analisar-imagem', upload.single('imagem'), async (req, res) => {
     try {
-        // Verifica se o arquivo realmente chegou
         if (!req.file) {
             return res.status(400).json({ error: "Nenhuma imagem foi recebida." });
         }
 
-        // Converte a imagem em memória para Base64 para a IA conseguir "enxergar"
         const base64Image = req.file.buffer.toString('base64');
         const mimeType = req.file.mimetype;
         const dataURI = `data:${mimeType};base64,${base64Image}`;
 
-        const systemPrompt = "Você é um assistente acadêmico. Sua única tarefa é extrair e transcrever o texto presente na imagem fornecida, sem adicionar comentários extras.";
+        // Prompt engenheirado para forçar a IA a agir como um classificador
+        const systemPrompt = `Você é um assistente acadêmico especialista em leitura de provas.
+Sua tarefa é analisar a imagem enviada, identificar o que é o enunciado da questão e o que é a resposta escrita pelo aluno.
+Você DEVE retornar EXATAMENTE um objeto JSON válido, sem formatações adicionais ou marcações markdown, contendo duas chaves:
+{
+  "pergunta": "texto do enunciado aqui",
+  "respostaAluno": "texto da resposta aqui"
+}`;
 
-        // Chamada para a IA ler a imagem
         const completion = await grokViaOpenRouter.chat.completions.create({
             model: "x-ai/grok-4.20", 
             max_tokens: 2000,
@@ -130,20 +133,26 @@ app.post('/analisar-imagem', upload.single('imagem'), async (req, res) => {
                 { 
                     role: "user", 
                     content: [
-                        { type: "text", text: "Transcreva o texto desta imagem." },
+                        { type: "text", text: "Analise a imagem da prova e retorne o JSON solicitado." },
                         { type: "image_url", image_url: { url: dataURI } }
                     ]
                 }
             ],
         });
 
-        const text = completion.choices[0].message.content;
+        // Captura o texto retornado pela IA e converte de volta para um objeto JavaScript
+        const respostaIA = completion.choices[0].message.content;
         
-        // Retorna o texto extraído para o front-end
-        res.json({ textoExtraido: text }); 
+        // Remove possíveis blocos de código markdown (```json ... ```) caso a IA seja teimosa
+        const textoLimpo = respostaIA.replace(/```json/g, '').replace(/```/g, '').trim();
+        
+        const dadosEstruturados = JSON.parse(textoLimpo);
+        
+        // Envia o JSON estruturado para o frontend
+        res.json(dadosEstruturados); 
 
     } catch (err) {
-        console.error("Erro na leitura da imagem (OPENROUTER):", err);
+        console.error("Erro na leitura da imagem:", err);
         return res.status(500).json({ error: "Erro interno ao processar a imagem." });
     }
 });
